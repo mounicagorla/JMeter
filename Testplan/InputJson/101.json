@@ -1,0 +1,110 @@
+{
+  "orderNumber": "56336424",
+  "orderDate": "2022-01-06T06:00:00Z",
+  "buyer": {
+    "name": "ABC Enterprise Co. LTD",
+    "physicalAddress": {
+      "address1": "1 Bowerman Dr",
+      "address2": "Suite 26",
+      "address3": "",
+      "area": "",
+      "city": "Beaverton",
+      "state": "OR",
+      "postalCode": "97005",
+      "country": "USA",
+      "county": "Washington County"
+    }
+  },
+  "seller": {
+    "name": "ABC Enterprise Co. LTD",
+    "physicalAddress": {
+      "address1": "1 Bowerman Dr",
+      "address2": "Suite 26",
+      "address3": "",
+      "area": "",
+      "city": "Beaverton",
+      "state": "OR",
+      "postalCode": "97005",
+      "country": "USA",
+      "county": "Washington County"
+    }
+  },
+  "items": [
+    {
+      "orderItemNumber": "01",
+      "catalog": {
+        "itemID": "1234986",
+        "source": "BUYER",
+        "itemDescription": "Leather"
+      },
+      "nikeMaterial": {
+        "source": "PCX",
+        "id": "696372",
+        "description": "Leather-Grain;Corrected Grain;Bovine (Cow); Thickness Min (mm): 1.40; Thickness Max (mm): 1.60"
+      },
+      "quantity": 4,
+      "unitOfMeasure": {
+        "unitOfMeasure": "KILOGRAM"
+      },
+      "color": [
+        {
+          "colorBrand": "PANTONE",
+          "name": "Dark Blue C",
+          "colorCode": "Dark-Blue-C",
+          "description": "0 36 156"
+        }
+      ],
+      "precedingOrder": [
+        {
+          "vendorName": "ABC Enterprise Co. LTD",
+          "orderNumber": "1234",
+          "orderItemNumber": "01"
+        }
+      ],
+      "price": {
+        "currency": "USD",
+        "unitPrice": 4,
+        "unitOfMeasure": {
+          "unitOfMeasure": "KILOGRAM"
+        },
+        "unitPriceAdjustment": 4,
+        "unitPriceAdjustmentType": "SURCHARGE",
+        "unitPriceAdjustmentReason": "SELLER_SALES_STRATEGIES",
+        "flatPrice": 4,
+        "flatPriceType": "SURCHARGE",
+        "flatPriceReason": "SELLER_SALES_STRATEGIES"
+      },
+      "incoTerm": "CFR",
+      "requestedShipDate": "2022-01-06T06:00:00Z",
+      "requestedDeliveryDate": "2022-01-06T06:00:00Z",
+      "shipFrom": {
+        "name": "ABC Enterprise Co. LTD",
+        "physicalAddress": {
+          "address1": "1 Bowerman Dr",
+          "address2": "Suite 26",
+          "address3": "",
+          "area": "",
+          "city": "Beaverton",
+          "state": "OR",
+          "postalCode": "97005",
+          "country": "USA",
+          "county": "Washington County"
+        }
+      },
+      "shipTo": {
+        "name": "ABC Enterprise Co. LTD",
+        "physicalAddress": {
+          "address1": "1 Bowerman Dr",
+          "address2": "Suite 26",
+          "address3": "",
+          "area": "",
+          "city": "Beaverton",
+          "state": "OR",
+          "postalCode": "97005",
+          "country": "USA",
+          "county": "Washington County"
+        }
+      }
+    }
+  ]
+}
