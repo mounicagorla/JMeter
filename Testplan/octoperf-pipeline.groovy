@@ -17,7 +17,7 @@ node {
 
     stage('Execute Performance Tests') {
         dir("${WORKSPACE}/scripts") {
-            bat "c:/apache-jmeter/apache-jmeter/bin/jmeter.bat -n -t C:\Users\mgorla\workspacejm\Testplan\submitMaterialOrder.jmx -l C:\Users\mgorla\workspacejm\Testplan\testreport.jtl"
+            bat "c:/apache-jmeter/apache-jmeter/bin/jmeter.bat -n -t submitMaterialOrder.jmx -l testreport.jtl"
         }
     }
 
