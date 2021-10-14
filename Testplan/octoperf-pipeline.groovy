@@ -16,7 +16,7 @@ node {
     }
 
     stage('Execute Performance Tests') {
-     bat " cd c:/apache-jmeter/apache-jmeter/bin/jmeter.bat -n -t submitMaterialOrder.jmx -l testreport.jtl"
+     build job: 'jmeterdemo'
     }
 
     stage('Analyse Results') {
