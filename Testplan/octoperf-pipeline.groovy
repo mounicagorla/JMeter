@@ -16,7 +16,7 @@ node {
     }
 
     stage('Execute Performance Tests') {
-       cd C:\apache-jmeter-5.4.1\apache-jmeter-5.4.1\bin jmeter -n -t C:\Users\mgorla\workspacejm\Testplan\submitMaterialOrder.jmx -l C:\Users\mgorla\workspacejm\Testplan\testreport.jtl
+       cd C:/apache-jmeter-5.4.1/apache-jmeter-5.4.1/bin jmeter -n -t C:/Users/mgorla/workspacejm/Testplan/submitMaterialOrder.jmx 
     }
 
     stage('Analyse Results') {
