@@ -16,7 +16,7 @@ node {
     }
 
     stage('Execute Performance Tests') {
-      bat "c:/apache-jmeter/apache-jmeter/bin/jmeter.bat"
+     
     }
 
     stage('Analyse Results') {
