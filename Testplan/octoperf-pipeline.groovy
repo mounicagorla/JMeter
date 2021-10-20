@@ -16,8 +16,14 @@ node {
     }
 
     stage('Execute Performance Tests') {
-          bat  'C:/apache-jmeter-5.4.1/apache-jmeter-5.4.1/bin/jmeter.bat -n -t C:/Users/mgorla/workspacejm/Testplan/submitMaterialOrder.jmx'
+          bat  'C:/apache-jmeter-5.4.1/apache-jmeter-5.4.1/bin/jmeter.bat -n -t Testplan/submitMaterialOrder.jmx -l Testplan/testreport.jtl'
     }
+    
+    stage('Publish Report') {
+            steps {
+                perfReport filterRegex: '', sourceDataFiles: '**/*.jtl'
+            }
+        }
 
     stage('Analyse Results') {
         echo "Analyse results"
