@@ -16,7 +16,7 @@ node {
     }
 
     stage('Execute Performance Tests') {
-          bat  'C:/apache-jmeter-5.4.1/apache-jmeter-5.4.1/bin/jmeter.bat -n -t Testplan/submitMaterialOrder.jmx -Jclientid=nike.niketech.edge-mgorla -Jclientsecret=T8sgW_b00dK2e1oEcQ2awYY-orID4mE3b7TByQxV5yjgj4iewL4euk2bNYd6brZO -l Testplan/testreport.jtl'
+          bat  'C:/apache-jmeter-5.4.1/apache-jmeter-5.4.1/bin/jmeter.bat -n -t  C:/Users/mgorla/workspacejm/Testplan/submitMaterialOrder.jmx -Jclientid=nike.niketech.edge-mgorla -Jclientsecret=T8sgW_b00dK2e1oEcQ2awYY-orID4mE3b7TByQxV5yjgj4iewL4euk2bNYd6brZO -l C:/Users/mgorla/workspacejm/Testplan/testreport.jtl'
     }
     
     stage('Publish Report') {
