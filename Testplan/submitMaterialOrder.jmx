@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${ThreadNumber}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ordertoken" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="client_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">${clientid}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">client_id</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="client_secret" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">${clientsecret}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">client_secret</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="grant_type" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">client_credentials</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">grant_type</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="scope" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">manufacture:materialorder::create:</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">scope</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">api.aegis.nikecloud.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">v1/qa/token</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">order_access_token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.access_token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">no value</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="submitMaterialOrder" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;orderNumber&quot;: &quot;Test Order STD_${__Random(9,999999999,orderNumber)}&quot;,&#xd;
+    &quot;orderDate&quot;: &quot;2024-01-06T14:50:30Z&quot;,&#xd;
+    &quot;buyer&quot;: {&#xd;
+      &quot;name&quot;: &quot;Test buyer STD&quot;,&#xd;
+      &quot;physicalAddress&quot;: {&#xd;
+        &quot;address1&quot;: &quot;Test buyer address1#%&quot;,&#xd;
+        &quot;address2&quot;: &quot;Test buyer address2&quot;,&#xd;
+        &quot;address3&quot;: &quot;Test buyer address3^*&amp;&quot;,&#xd;
+        &quot;area&quot;: &quot;Test buyer area&quot;,&#xd;
+        &quot;city&quot;: &quot;Test buyer city&quot;,&#xd;
+        &quot;state&quot;: &quot;Test buyer state&quot;,&#xd;
+        &quot;postalCode&quot;: &quot;97005&quot;,&#xd;
+        &quot;country&quot;: &quot;USA&quot;,&#xd;
+        &quot;county&quot;: &quot;Test buyer county&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    &quot;seller&quot;: {&#xd;
+      &quot;name&quot;: &quot;Test seller STD&quot;,&#xd;
+      &quot;physicalAddress&quot;: {&#xd;
+        &quot;address1&quot;: &quot;Test seller address1&quot;,&#xd;
+        &quot;address2&quot;: &quot;Test seller address2&quot;,&#xd;
+        &quot;address3&quot;: &quot;Test seller address3&quot;,&#xd;
+        &quot;area&quot;: &quot;Test seller area&quot;,&#xd;
+        &quot;city&quot;: &quot;Test seller city&quot;,&#xd;
+        &quot;state&quot;: &quot;Test seller state&quot;,&#xd;
+        &quot;postalCode&quot;: &quot;88802&quot;,&#xd;
+        &quot;country&quot;: &quot;USA&quot;,&#xd;
+        &quot;county&quot;: &quot;Test seller county&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    &quot;items&quot;: [&#xd;
+      {&#xd;
+        &quot;orderItemNumber&quot;: &quot;Test Item Number STD&quot;,&#xd;
+        &quot;catalog&quot;: {&#xd;
+          &quot;itemID&quot;: &quot;Tst Cat_S&quot;,&#xd;
+          &quot;source&quot;: &quot;BUYER&quot;,&#xd;
+          &quot;itemDescription&quot;: &quot;Test Leather&quot;&#xd;
+        },&#xd;
+        &quot;nikeMaterial&quot;: {&#xd;
+          &quot;source&quot;: &quot;PCX&quot;,&#xd;
+          &quot;id&quot;: &quot;6963722&quot;,&#xd;
+          &quot;description&quot;: &quot;Leather-Grain;Corrected Grain;Bovine (Cow); Thickness Min (mm): 1.40; Thickness Max (mm): 1.60&quot;&#xd;
+        },&#xd;
+        &quot;quantity&quot;: 10766.687658,&#xd;
+        &quot;unitOfMeasure&quot;: {&#xd;
+          &quot;unitOfMeasure&quot;: &quot;KILOGRAM&quot;&#xd;
+        },&#xd;
+        &quot;color&quot;: [&#xd;
+          {&#xd;
+            &quot;colorBrand&quot;: &quot;PANTONE&quot;,&#xd;
+            &quot;name&quot;: &quot;Test Color&quot;,&#xd;
+            &quot;colorCode&quot;: &quot;Dark-Blue-c&quot;,&#xd;
+            &quot;description&quot;: &quot;0 36 156&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;precedingOrder&quot;: [&#xd;
+          {&#xd;
+            &quot;vendorName&quot;: &quot;Test vendorName STD&quot;,&#xd;
+            &quot;orderNumber&quot;: &quot;Preced1234&quot;,&#xd;
+            &quot;orderItemNumber&quot;: &quot;05&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;price&quot;: {&#xd;
+          &quot;currency&quot;: &quot;USD&quot;,&#xd;
+          &quot;unitPrice&quot;: 300.189,&#xd;
+          &quot;unitOfMeasure&quot;: {&#xd;
+            &quot;unitOfMeasure&quot;: &quot;KILOGRAM&quot;&#xd;
+          },&#xd;
+          &quot;unitPriceAdjustment&quot;: 5765.376,&#xd;
+          &quot;unitPriceAdjustmentType&quot;: &quot;SURCHARGE&quot;,&#xd;
+          &quot;unitPriceAdjustmentReason&quot;: &quot;SELLER_SALES_STRATEGIES&quot;,&#xd;
+          &quot;flatRatePrice&quot;: 865.09,&#xd;
+          &quot;flatPriceType&quot;: &quot;SURCHARGE&quot;,&#xd;
+          &quot;flatPriceReason&quot;: &quot;SELLER_SALES_STRATEGIES&quot;&#xd;
+        },&#xd;
+        &quot;incoTerm&quot;: &quot;CFR&quot;,&#xd;
+        &quot;requestedShipDate&quot;: &quot;2024-05-06T20:30:40Z&quot;,&#xd;
+        &quot;requestedDeliveryDate&quot;: &quot;2022-01-06T06:00:00Z&quot;,&#xd;
+        &quot;shipFrom&quot;: {&#xd;
+          &quot;name&quot;: &quot;Test shipFrom STD&quot;,&#xd;
+          &quot;physicalAddress&quot;: {&#xd;
+            &quot;address1&quot;: &quot;Test shipFrom address1&quot;,&#xd;
+            &quot;address2&quot;: &quot;Test shipFrom address2&quot;,&#xd;
+            &quot;address3&quot;: &quot;Test shipFrom address3&quot;,&#xd;
+            &quot;area&quot;: &quot;Test shipFrom area&quot;,&#xd;
+            &quot;city&quot;: &quot;Test shipFrom city&quot;,&#xd;
+            &quot;state&quot;: &quot;Test shipFrom state&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;95550&quot;,&#xd;
+            &quot;country&quot;: &quot;USA&quot;,&#xd;
+            &quot;county&quot;: &quot;Test shipFrom county&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;shipTo&quot;: {&#xd;
+          &quot;name&quot;: &quot;Test shipTo STD&quot;,&#xd;
+          &quot;physicalAddress&quot;: {&#xd;
+            &quot;address1&quot;: &quot;Test shipTo address1&quot;,&#xd;
+            &quot;address2&quot;: &quot;Test shipTo address2&quot;,&#xd;
+            &quot;address3&quot;: &quot;Test shipTo address3&quot;,&#xd;
+            &quot;area&quot;: &quot;Test shipTo area&quot;,&#xd;
+            &quot;city&quot;: &quot;Test shipTo city&quot;,&#xd;
+            &quot;state&quot;: &quot;Test shipTo state&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;97005&quot;,&#xd;
+            &quot;country&quot;: &quot;USA&quot;,&#xd;
+            &quot;county&quot;: &quot;Test shipTo county&quot;&#xd;
+          }&#xd;
+        }&#xd;
+      }&#xd;
+    ]&#xd;
+  }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">gsm-edge-dev-api.gsm-tech-test.nikecloud.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/api/submitOrder/v1</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + vars.get(&quot;order_access_token&quot;)));</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+            <stringProp name="delimiter">,</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">C:/Users/mgorla/workspacejm/Testplan/InputJson/payload.csv</stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="variableNames">payload</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49587">201</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="stocktoken" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="client_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">nike.niketech.edge-mgorla</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">client_id</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="client_secret" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">T8sgW_b00dK2e1oEcQ2awYY-orID4mE3b7TByQxV5yjgj4iewL4euk2bNYd6brZO</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">client_secret</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="grant_type" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">client_credentials</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">grant_type</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="scope" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">manufacture:materialstock::create:</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">scope</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">api.aegis.nikecloud.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">v1/qa/token</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">stock_access_token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.access_token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">no value</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addMaterialStock" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;stockDate&quot;: &quot;2022-01-06T06:00:00Z&quot;,&#xd;
+  &quot;heldAt&quot;: {&#xd;
+    &quot;name&quot;: &quot;ABC Enterprise Co. LTD_${__Random(9,999999999,testname)}&quot;,&#xd;
+    &quot;physicalAddress&quot;: {&#xd;
+      &quot;address1&quot;: &quot;1 Bowerman Dr&quot;,&#xd;
+      &quot;address2&quot;: &quot;Suite 26&quot;,&#xd;
+      &quot;address3&quot;: &quot;&quot;,&#xd;
+      &quot;area&quot;: &quot;&quot;,&#xd;
+      &quot;city&quot;: &quot;Beaverton&quot;,&#xd;
+      &quot;state&quot;: &quot;OR&quot;,&#xd;
+      &quot;postalCode&quot;: &quot;97005&quot;,&#xd;
+      &quot;country&quot;: &quot;USA&quot;,&#xd;
+      &quot;county&quot;: &quot;Washington County&quot;&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;items&quot;: [&#xd;
+    {&#xd;
+      &quot;catalogItemID&quot;: &quot;1234986&quot;,&#xd;
+      &quot;catalogItemDescription&quot;: &quot;Leather&quot;,&#xd;
+      &quot;nikeMaterial&quot;: {&#xd;
+        &quot;source&quot;: &quot;PCX&quot;,&#xd;
+        &quot;id&quot;: &quot;696372&quot;,&#xd;
+        &quot;description&quot;: &quot;Leather-Grain;Corrected Grain;Bovine (Cow); Thickness Min (mm): 1.40; Thickness Max (mm): 1.60&quot;&#xd;
+      },&#xd;
+      &quot;shelfLife&quot;: 200,&#xd;
+      &quot;shelfLifeUnitOfMeasure&quot;: {&#xd;
+        &quot;unitOfMeasure&quot;: &quot;DAY&quot;&#xd;
+      },&#xd;
+      &quot;stockDetails&quot;: [&#xd;
+        {&#xd;
+          &quot;quantity&quot;: 8.7,&#xd;
+          &quot;status&quot;: &quot;AVAILABLE&quot;,&#xd;
+          &quot;color&quot;: [&#xd;
+            {&#xd;
+              &quot;colorBrand&quot;: &quot;PANTONE&quot;,&#xd;
+              &quot;name&quot;: &quot;Dark Blue C&quot;,&#xd;
+              &quot;colorCode&quot;: &quot;Dark-Blue-C&quot;,&#xd;
+              &quot;description&quot;: &quot;0 36 156&quot;&#xd;
+            }&#xd;
+          ],&#xd;
+          &quot;productionProcessStep&quot;: &quot;FINISHED&quot;,&#xd;
+          &quot;unitOfMeasure&quot;: {&#xd;
+            &quot;unitOfMeasure&quot;: &quot;CENTIMETER&quot;&#xd;
+          },&#xd;
+          &quot;shelfLifeStartDate&quot;: &quot;2021-04-06T17:32:28Z&quot;,&#xd;
+          &quot;supplier&quot;: {&#xd;
+            &quot;name&quot;: &quot;ABC Enterprise Co. LTD&quot;,&#xd;
+            &quot;physicalAddress&quot;: {&#xd;
+              &quot;address1&quot;: &quot;1 Bowerman Dr&quot;,&#xd;
+              &quot;address2&quot;: &quot;Suite 26&quot;,&#xd;
+              &quot;address3&quot;: &quot;&quot;,&#xd;
+              &quot;area&quot;: &quot;&quot;,&#xd;
+              &quot;city&quot;: &quot;Beaverton&quot;,&#xd;
+              &quot;state&quot;: &quot;OR&quot;,&#xd;
+              &quot;postalCode&quot;: &quot;97005&quot;,&#xd;
+              &quot;country&quot;: &quot;USA&quot;,&#xd;
+              &quot;county&quot;: &quot;Washington County&quot;&#xd;
+            }&#xd;
+          }&#xd;
+        }&#xd;
+      ]&#xd;
+    }&#xd;
+  ]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">gsm-edge-dev-api.gsm-tech-test.nikecloud.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/api/addMaterialStock/v1</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + vars.get(&quot;stock_access_token&quot;)));
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49587">201</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <BeanShellListener guiclass="TestBeanGUI" testclass="BeanShellListener" testname="BeanShell Listener" enabled="true">
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="script">long responseTime = sampleResult.getEndTime() - sampleResult.getStartTime();
+if(responseTime &lt; 600) {
+    FileOutputStream f = new FileOutputStream(&quot;C:/Users/mgorla/workspacejm/Testplan/myreport.csv&quot;, true);
+    PrintStream p = new PrintStream(f);
+    this.interpreter.setOut(p); 
+    print(sampleResult.getSampleLabel() + &quot;,&quot; + responseTime);
+    f.close(); 
+}</stringProp>
+        </BeanShellListener>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+          <stringProp name="DurationAssertion.duration">5000</stringProp>
+        </DurationAssertion>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="SLA_elapsedTime_threshold" elementType="Argument">
+              <stringProp name="Argument.name">SLA_elapsedTime_threshold</stringProp>
+              <stringProp name="Argument.value">300</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="SLA_elapsedTime_failures" elementType="Argument">
+              <stringProp name="Argument.name">SLA_elapsedTime_failures</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="SLA_elapsedTime_maxErrors" elementType="Argument">
+              <stringProp name="Argument.name">SLA_elapsedTime_maxErrors</stringProp>
+              <stringProp name="Argument.value">5</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ThreadNumber" elementType="Argument">
+              <stringProp name="Argument.name">ThreadNumber</stringProp>
+              <stringProp name="Argument.value">${__P(Thread,2)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="RampUpPeriod" elementType="Argument">
+              <stringProp name="Argument.name">RampUpPeriod</stringProp>
+              <stringProp name="Argument.value">${__P(RampUpPeriod,1)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="clientid" elementType="Argument">
+              <stringProp name="Argument.name">clientid</stringProp>
+              <stringProp name="Argument.value">${__P(clientid,nike.niketech.edge-mgorla)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="clientsecret" elementType="Argument">
+              <stringProp name="Argument.name">clientsecret</stringProp>
+              <stringProp name="Argument.value">${__P(clientsecret,T8sgW_b00dK2e1oEcQ2awYY-orID4mE3b7TByQxV5yjgj4iewL4euk2bNYd6brZO)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+          <stringProp name="BeanShellAssertion.query">
+ 
+long elapsed = SampleResult.getTime() ;
+ 
+long threshold = Long.parseLong(vars.get(&quot;SLA_elapsedTime_threshold&quot;));
+ 
+if (elapsed &gt; threshold) {
+ 
+    int failureCount = Integer.parseInt(vars.get(&quot;SLA_elapsedTime_failures&quot;));
+    failureCount++;
+ 
+    int maxErrors = Integer.parseInt(vars.get(&quot;SLA_elapsedTime_maxErrors&quot;));
+ 
+    if (failureCount &gt;= maxErrors) {
+        Failure = true;
+        FailureMessage = &quot;SF: failureCount&quot; + &quot; requests failed to finish in &quot; + threshold + &quot; ms&quot;;
+        SampleResult.setSuccessful(false);
+        SampleResult.setResponseMessage(failureCount + &quot; requests failed to finish in &quot; + threshold + &quot; ms&quot;);
+    } else {
+ 
+        vars.put(&quot;SLA_elapsedTime_failures&quot;, String.valueOf(failureCount));
+    };
+    SampleResult.setResponseMessage(&quot;duration: &quot;+elapsed+&quot;; failureCount= &quot;+failureCount);
+}</stringProp>
+          <stringProp name="BeanShellAssertion.filename"></stringProp>
+          <stringProp name="BeanShellAssertion.parameters"></stringProp>
+          <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+        </BeanShellAssertion>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
